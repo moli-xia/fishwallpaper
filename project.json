@@ -1,0 +1,155 @@
+{
+  "title": "碧池观鱼 · Koi Pond",
+  "description": "俯视锦鲤池塘，点击投喂，晴雨雪天气，锦鲤命名与食量排行。独立复刻。",
+  "type": "web",
+  "file": "index.html",
+  "preview": "assets/pond.jpg",
+  "general": {
+    "properties": {
+      "weather": {
+        "text": "池塘天气",
+        "type": "combo",
+        "value": "sunny",
+        "options": [
+          {
+            "label": "晴日",
+            "value": "sunny"
+          },
+          {
+            "label": "多云",
+            "value": "cloudy"
+          },
+          {
+            "label": "细雨",
+            "value": "rain"
+          },
+          {
+            "label": "落雪",
+            "value": "snow"
+          }
+        ],
+        "order": 0
+      },
+      "rainamount": {
+        "text": "雨量",
+        "type": "slider",
+        "value": 0.5,
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "order": 1,
+        "fraction": true,
+        "precision": 2
+      },
+      "snowamount": {
+        "text": "雪量",
+        "type": "slider",
+        "value": 0.5,
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "order": 2,
+        "fraction": true,
+        "precision": 2
+      },
+      "speed": {
+        "text": "游动速度",
+        "type": "slider",
+        "value": 1,
+        "min": 0.3,
+        "max": 2,
+        "step": 0.1,
+        "order": 3,
+        "fraction": true,
+        "precision": 2
+      },
+      "showui": {
+        "text": "显示界面",
+        "type": "bool",
+        "value": true,
+        "order": 4
+      },
+      "sound": {
+        "text": "开启声音",
+        "type": "bool",
+        "value": false,
+        "order": 5
+      },
+      "water": {
+        "text": "水声",
+        "type": "bool",
+        "value": true,
+        "order": 6
+      },
+      "watertype": {
+        "text": "水声种类",
+        "type": "combo",
+        "value": "stream",
+        "options": [
+          {
+            "label": "溪流潺潺",
+            "value": "stream"
+          },
+          {
+            "label": "山泉叮咚",
+            "value": "spring"
+          },
+          {
+            "label": "叠水瀑声",
+            "value": "cascade"
+          },
+          {
+            "label": "池水轻漾",
+            "value": "lapping"
+          },
+          {
+            "label": "竹筒惊鹿",
+            "value": "bamboo"
+          }
+        ],
+        "order": 7
+      },
+      "weathersound": {
+        "text": "天气环境音",
+        "type": "bool",
+        "value": true,
+        "order": 8
+      },
+      "music": {
+        "text": "禅意音乐",
+        "type": "combo",
+        "value": "guqin",
+        "options": [
+          {
+            "label": "古琴",
+            "value": "guqin"
+          },
+          {
+            "label": "颂钵",
+            "value": "bowl"
+          },
+          {
+            "label": "风铃",
+            "value": "chimes"
+          },
+          {
+            "label": "关闭",
+            "value": "off"
+          }
+        ],
+        "order": 9
+      },
+      "volume": {
+        "text": "总音量",
+        "type": "slider",
+        "value": 0.7,
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "order": 10,
+        "fraction": true,
+        "precision": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# Build output (see scripts/build*.sh)
+dist/
+build/
+output/
+android/build/
+android/assets/
+native/windows/bin/
+native/windows/obj/
+# Local tools and system files
+.claude/
+node_modules/
+.DS_Store

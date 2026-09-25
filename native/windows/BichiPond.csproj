@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 碧池观鱼 for Windows: .NET Framework 4.8 (part of every Windows 10 and 11) + WebView2 (Edge's engine, also
+       preinstalled), so the download is small and nothing else needs installing. Builds on macOS/Linux too. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>BichiPond</AssemblyName>
+    <RootNamespace>BichiPond</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Version>1.2.0</Version>
+    <Product>碧池观鱼</Product>
+    <AssemblyTitle>碧池观鱼 · 锦鲤池塘动态壁纸</AssemblyTitle>
+    <Copyright>碧池观鱼 · 独立复刻作品</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <!-- The pond itself: the same web files as every other build, served to WebView2 from a web\ folder. -->
+  <ItemGroup>
+    <Content Include="..\..\index.html;..\..\style.css;..\..\core.js;..\..\art.js;..\..\gl.js;..\..\scene.js;..\..\audio.js;..\..\app.js" Link="web\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\pond.jpg;..\..\assets\pond-data.js;..\..\assets\favicon.svg" Link="web\assets\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

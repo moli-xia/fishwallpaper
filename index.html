@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#738c7c" />
+  <meta name="description" content="一方碧潭，片刻闲心。投喂锦鲤、听雨观鱼，拥有属于自己的小小池塘。" />
+  <title>碧池观鱼 · 一方池塘，片刻闲心</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="core.js" defer></script>
+  <script src="art.js" defer></script>
+  <script src="gl.js" defer></script>
+  <script src="scene.js" defer></script>
+  <script src="audio.js" defer></script>
+  <script src="assets/pond-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main id="pond" aria-label="锦鲤池塘">
+    <div class="pond-bed" aria-hidden="true"></div>
+    <div class="water-tint" aria-hidden="true"></div>
+    <canvas id="world" tabindex="0" aria-label="交互池塘：点击水面投喂锦鲤，按空格在中央投喂"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <canvas id="labels" aria-hidden="true"></canvas>
+    <header class="masthead ui">
+      <span class="seal" aria-hidden="true">观</span>
+      <div><h1>碧池观鱼</h1><p>A LITTLE POND, A QUIET MIND</p></div>
+    </header>
+    <aside class="weather-card ui" aria-label="时间与天气">
+      <div class="weather-top"><span id="weather-location">池畔时光</span><button class="icon-button" data-panel="weather" aria-label="天气设置" data-icon="sliders"></button></div>
+      <time id="clock">--:--</time><div id="calendar"></div>
+      <div class="weather-line"><span id="weather-symbol" data-icon="sun"></span><strong id="weather-label">晴日</strong><span id="temperature">随心天气</span></div>
+      <div class="weather-foot"><span class="status-dot"></span><span id="weather-note">风轻水暖，正宜观鱼</span></div>
+    </aside>
+    <div class="verse ui"><span>水清鱼读月</span><span>花静鸟谈天</span><i>闲 观</i></div>
+    <div class="pond-meta ui"><span class="status-dot"></span><span id="fish-count">24 尾锦鲤，悠然自得</span><span class="meta-divider"></span><span id="fed-count">今日投喂 0 次</span></div>
+    <div class="bottom-ui ui">
+      <p class="pond-hint" id="pond-hint">轻点水面，投下一点欢喜</p>
+      <nav class="dock" aria-label="池塘工具">
+        <button id="feed-button" class="dock-button active" aria-pressed="true"><span data-icon="feed"></span><span>投喂</span></button>
+        <span class="dock-divider"></span>
+        <button class="dock-button" data-panel="fish"><span data-icon="fish"></span><span>我的锦鲤</span></button>
+        <button class="dock-button" data-panel="ranking"><span data-icon="trophy"></span><span>食量榜</span></button>
+        <button class="dock-button" data-panel="weather"><span data-icon="sun"></span><span>天气</span></button>
+        <span class="dock-divider"></span>
+        <button id="sound-button" class="dock-button compact" aria-label="开启声音" aria-pressed="false"><span data-icon="sound-off"></span></button>
+        <button class="dock-button compact" data-panel="settings" aria-label="池塘设置"><span data-icon="sliders"></span></button>
+        <button id="zen-button" class="dock-button compact" aria-label="进入沉浸模式"><span data-icon="expand"></span></button>
+      </nav>
+    </div>
+    <button id="exit-zen" class="zen-exit" hidden>退出沉浸 <kbd>Esc</kbd></button>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <dialog id="panel" aria-labelledby="panel-title">
+    <div class="panel-header"><div><span class="eyebrow" id="panel-eyebrow">MY LITTLE POND</span><h2 id="panel-title">我的锦鲤</h2></div><button class="icon-button close-panel" aria-label="关闭面板" data-icon="close"></button></div>
+    <div id="panel-content"></div>
+  </dialog>
+</body>
+</html>

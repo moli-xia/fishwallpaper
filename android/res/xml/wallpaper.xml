@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The live wallpaper as the system lists it; 设置 opens the full pond to feed, name koi and change the weather. -->
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:settingsActivity="com.bichi.koipond.MainActivity"
+    android:thumbnail="@drawable/icon_bg"
+    android:description="@string/wallpaper_description" />
