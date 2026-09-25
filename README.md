@@ -29,7 +29,7 @@ macOS · Windows · Android 动态壁纸，也能在浏览器和 Wallpaper Engin
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| macOS 12+（Apple 芯片） | `BichiKoiPond-<版本>-macOS.dmg` | 打开后拖进「应用程序」，双击运行，池塘即成为每块屏幕的桌面背景；菜单栏 🐟 控制。首次打开请右键 →「打开」（未经 Apple 公证） |
+| macOS 12+（Apple 芯片与 Intel） | `BichiKoiPond-<版本>-macOS.dmg` | 打开后拖进「应用程序」，双击运行，池塘即成为每块屏幕的桌面背景；菜单栏 🐟 控制。首次打开请右键 →「打开」（未经 Apple 公证） |
 | Windows 10 / 11 | `BichiKoiPond-<版本>-Windows.zip` | 解压整个文件夹，运行 `BichiPond.exe`；通知区域锦鲤图标控制。若提示“已保护你的电脑”，点“更多信息 → 仍要运行” |
 | Android 7.0+ | `BichiKoiPond-<版本>-Android.apk` | 安装后第一次打开即进入动态壁纸预览，点「设置壁纸」 |
 | 浏览器 / Wallpaper Engine | `BichiKoiPond-<版本>-Web.zip` | 解压后打开 `index.html`，或在 Wallpaper Engine 中导入该文件夹 |
@@ -146,7 +146,7 @@ gh auth login              # 首次使用时登录
 ./scripts/build-macos.sh
 ```
 
-生成 `dist/碧池观鱼.app`（约 4MB）和可拖拽安装的 `dist/碧池观鱼-<版本>.dmg`（当前 1.2.0），支持 macOS 12 及以上。构建工具链仍能链接 Intel 时生成通用二进制；当前机器的 macOS 27 SDK 已不含 x86_64 的 Swift 运行库，因此产物为 Apple 芯片（arm64）版本。应用为临时（ad-hoc）签名，首次在其他 Mac 上打开时需右键 →「打开」。
+生成 `dist/碧池观鱼.app`（约 4MB）和可拖拽安装的 `dist/碧池观鱼-<版本>.dmg`（当前 1.2.1），支持 macOS 12 及以上。构建工具链仍能链接 Intel 时生成通用二进制；当前机器的 macOS 27 SDK 已不含 x86_64 的 Swift 运行库，因此产物为 Apple 芯片（arm64）版本。应用为临时（ad-hoc）签名，首次在其他 Mac 上打开时需右键 →「打开」。
 
 双击打开后，池塘即铺满每块屏幕的桌面背景层——位于系统壁纸上、桌面图标下，不影响正常使用桌面；多显示器与空间切换均支持。
 
@@ -169,7 +169,7 @@ gh auth login              # 首次使用时登录
 ./scripts/build-windows.sh
 ```
 
-生成 `dist/碧池观鱼-Windows-<版本>.zip`（约 2MB，当前 1.2.0）。需要 .NET SDK 8 或更高版本（可在 macOS / Linux 上构建；本机装在 `~/.dotnet`，或用 `DOTNET` 指定路径）。程序基于 .NET Framework 4.8 与 WebView2（Edge 内核），二者都是 Windows 10 / 11 自带，用户无需另外安装任何东西；若 Windows 10 缺少 WebView2，程序会提示并打开下载页。
+生成 `dist/碧池观鱼-Windows-<版本>.zip`（约 2MB，当前 1.2.1）。需要 .NET SDK 8 或更高版本（可在 macOS / Linux 上构建；本机装在 `~/.dotnet`，或用 `DOTNET` 指定路径）。程序基于 .NET Framework 4.8 与 WebView2（Edge 内核），二者都是 Windows 10 / 11 自带，用户无需另外安装任何东西；若 Windows 10 缺少 WebView2，程序会提示并打开下载页。
 
 使用：解压整个文件夹，双击 `BichiPond.exe`。池塘铺满每块屏幕的桌面背景，位于桌面图标之下（兼容 Windows 11 24H2 起改变的桌面层结构），不影响正常使用桌面。
 
@@ -187,7 +187,7 @@ gh auth login              # 首次使用时登录
 ./scripts/build-android.sh
 ```
 
-生成 `android/build/碧池观鱼.apk`，并复制到 `dist/碧池观鱼.apk`（约 1.9MB，版本 1.2.0；需 `~/android-build` 下的 JDK 17 与 Android 构建工具，见脚本头部说明）。脚本每次都从当前网页源码重新拷贝资源，并沿用同一把签名密钥，新版本可直接覆盖安装，池塘里的锦鲤和设置都会保留。需要 Android 7.0（API 24）及以上。
+生成 `android/build/碧池观鱼.apk`，并复制到 `dist/碧池观鱼.apk`（约 1.9MB，版本 1.2.1；需 `~/android-build` 下的 JDK 17 与 Android 构建工具，见脚本头部说明）。脚本每次都从当前网页源码重新拷贝资源，并沿用同一把签名密钥，新版本可直接覆盖安装，池塘里的锦鲤和设置都会保留。需要 Android 7.0（API 24）及以上。
 
 这是**手机桌面的动态壁纸**：池塘就在主屏幕（及系统允许时的锁屏）背景里游动，应用图标和小部件浮在水面上。
 
@@ -197,8 +197,8 @@ gh auth login              # 首次使用时登录
 - 桌面被应用挡住或熄屏时完全停止绘制，不耗电；显示时以 60 帧、按屏幕原生分辨率绘制（最高 3 倍像素密度）。设备跟不上时分两级自动降低精度（不低于 1 倍），页面每分钟在日志里记一行帧率与分辨率（`adb logcat | grep "\[pond\]"`）。
 - 竖屏时池塘底图转四分之一，整方池塘（包括两侧的荷花丛与石头）铺满屏幕。
 
-实现：系统只给动态壁纸一块绘图表面（Surface），WebView 不能直接画进去；应用用这块表面建一个私有虚拟显示器，把池塘网页放在这个显示器上的 Presentation 窗口里，由 GPU（含 WebGL）直接渲染成壁纸。
+实现：系统只给动态壁纸一块绘图表面（Surface），WebView 不能直接画进去。池塘网页运行在私有虚拟显示器上的 Presentation 窗口里，由 GPU（含 WebGL）渲染；Android 10 起，虚拟显示器先渲染到 ImageReader，再由壁纸引擎用 `lockHardwareCanvas` 把每一帧画到壁纸上——这是所有手机都支持的常规壁纸绘制方式（1.2.0 让虚拟显示器直接写入壁纸表面，在部分厂商系统上会黑屏）。若 10 秒内没有任何画面，或系统不允许显示该窗口，壁纸改为显示池塘静态画面而不是黑屏，原因写在应用「设置 › 手机动态壁纸」的状态里。
 
-验证：已在 Android 14 模拟器（Pixel 6，WebView 113，主机 GPU）上安装并设为桌面与锁屏壁纸，确认池塘在主屏幕上以 60 帧、1082×2402 原生分辨率实时渲染，轻点空白处投喂、滑动不投喂，应用里切换下雨后桌面随之下雨，被应用遮挡时 CPU 占用降为零。
+验证：已在 Android 14 / 15 / 16 模拟器（Pixel 6，WebView 113 / 133，主机 GPU）上安装并设为桌面与锁屏壁纸，确认池塘在主屏幕上以 60 帧、1082×2402 原生分辨率实时渲染，轻点空白处投喂、滑动不投喂，应用里切换下雨后桌面随之下雨，被应用遮挡时 CPU 占用降为零。
 
 安装：把 APK 传到手机（隔空投送不可用于安卓，可用网盘/USB/局域网），点开安装并允许「安装未知来源应用」。

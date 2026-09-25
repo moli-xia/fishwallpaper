@@ -14,7 +14,7 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Product>碧池观鱼</Product>
     <AssemblyTitle>碧池观鱼 · 锦鲤池塘动态壁纸</AssemblyTitle>
     <Copyright>碧池观鱼 · 独立复刻作品</Copyright>

@@ -87,6 +87,10 @@ final class PondWeb {
         @JavascriptInterface
         public boolean isWallpaperActive() { return isOurWallpaper(context); }
 
+        /** What the live wallpaper last reported (running, or why it shows the still painting). */
+        @JavascriptInterface
+        public String wallpaperStatus() { return context.getSharedPreferences("pond", Context.MODE_PRIVATE).getString("wallpaperStatus", ""); }
+
         @JavascriptInterface
         public void setWallpaper() { MAIN.post(() -> openWallpaperPicker(context)); }
     }

@@ -10,8 +10,8 @@ SDK_ROOT="${ANDROID_BUILD:-$HOME/android-build}"
 JAVA_HOME="$SDK_ROOT/jdk/Contents/Home"
 BT="$SDK_ROOT/bt/android-14"
 AJ="$SDK_ROOT/plat/android-34/android.jar"
-VERSION_NAME="1.2.0"
-VERSION_CODE=3
+VERSION_NAME="1.2.1"
+VERSION_CODE=4
 export PATH="$JAVA_HOME/bin:$PATH"
 cd "$ROOT/android"
 
