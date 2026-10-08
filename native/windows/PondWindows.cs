@@ -19,7 +19,8 @@ namespace BichiPond
         public static string WebFolder => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "web");
 
         /// <summary>A WebView2 showing the pond; <paramref name="mode"/> "wallpaper" hides the page's controls.</summary>
-        public static async Task<WebView2> Create(Control parent, CoreWebView2Environment env, string mode, Action<WebView2, string> onSave)
+        public static async Task<WebView2> Create(Control parent, CoreWebView2Environment env, string mode, Action<WebView2, string> onSave,
+            Action<WebView2, CoreWebView2ProcessFailedKind> onProcessFailed)
         {
             var view = new WebView2 { Dock = DockStyle.Fill, DefaultBackgroundColor = Backdrop };
             parent.Controls.Add(view);
@@ -40,8 +41,11 @@ namespace BichiPond
                 if (!Uri.TryCreate(e.Uri, UriKind.Absolute, out var uri) || uri.Host == Host) return;
                 e.Cancel = true; OpenInBrowser(e.Uri);
             };
-            // If the page's renderer dies (GPU reset, low memory), load the pond again rather than leave a blank desktop.
-            core.ProcessFailed += (s, e) => { try { core.Reload(); } catch (Exception) { } };
+            // If a WebView2 process dies, let the host decide what to do: a lost renderer can be reloaded in place,
+            // but a browser process that was terminated from outside (an Edge WebView2 runtime update, or the
+            // uninstaller of an Edge-family product such as Copilot, which kills every msedgewebview2 process to
+            // release the DLL locks) has nothing left to reload — that view needs rebuilding from the environment.
+            core.ProcessFailed += (s, e) => onProcessFailed(view, e.ProcessFailedKind);
             core.Navigate($"https://{Host}/index.html" + (mode == null ? "" : "?mode=" + mode));
             return view;
         }
@@ -97,13 +101,13 @@ namespace BichiPond
         // Never take focus from whatever the person is using.
         protected override bool ShowWithoutActivation => true;
 
-        public async Task Start(CoreWebView2Environment env, Action<WebView2, string> onSave)
+        public async Task Start(CoreWebView2Environment env, Action<WebView2, string> onSave, Action<WebView2, CoreWebView2ProcessFailedKind> onProcessFailed)
         {
             CreateHandle();
             // Once inside the desktop the window's position is relative to its new parent; keep WinForms in agreement.
             Bounds = Desktop.Attach(Handle, Screen.Bounds);
             Show();
-            View = await PondPage.Create(this, env, "wallpaper", onSave);
+            View = await PondPage.Create(this, env, "wallpaper", onSave, onProcessFailed);
         }
 
         /// <summary>Stops drawing while nobody can see it (a maximised app over it, the screen locked), and back.</summary>
@@ -140,10 +144,10 @@ namespace BichiPond
             MinimumSize = new Size(LogicalToDeviceUnits(440), LogicalToDeviceUnits(600));
         }
 
-        public async Task Start(CoreWebView2Environment env, Action<WebView2, string> onSave)
+        public async Task Start(CoreWebView2Environment env, Action<WebView2, string> onSave, Action<WebView2, CoreWebView2ProcessFailedKind> onProcessFailed)
         {
             Show();
-            View = await PondPage.Create(this, env, null, onSave);
+            View = await PondPage.Create(this, env, null, onSave, onProcessFailed);
         }
     }
 }
